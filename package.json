@@ -1,0 +1,26 @@
+{
+  "name": "dead-inside",
+  "displayName": "Dead Inside",
+  "publisher": "your-name",
+  "description": "Плагин, который выводит саркастические (правдивые) сообщения о твоем коде (и о тебе)",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "dead-inside.say",
+        "title": "Dead Inside: Say something"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {}
+}
