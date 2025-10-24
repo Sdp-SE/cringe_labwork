@@ -1,27 +1,32 @@
 const vscode = require('vscode');
 
-const messages = [
-  "крутой код, но тебя все еще никто не любит",
-  "и это все на что ты способен? пф",
-  "не зря они тебя бросили",
-  "лучше бы ты стал тиктокером, писать код не твое",
-  "че ты написал??? ты хоть это читаешь???"
-];
-
 function activate(context) {
-  console.log('Extension "dead-inside" is active');
+    console.log("Dead Inside плагин запущен!");
 
-  let disposable = vscode.commands.registerCommand('dead-inside.say', function () {
-    const m = messages[Math.floor(Math.random() * messages.length)];
-    vscode.window.showInformationMessage(m);
-  });
+    const messages = [
+        "крутой код, но тебя все еще никто не любит",
+        "и это все на что ты способен? пф",
+        "не зря они тебя бросили",
+        "лучше бы ты стал тиктокером, писать код не твое",
+        "че ты написал??? ты хоть это читаешь???"
+    ];
 
-  context.subscriptions.push(disposable);
+    // Команда для ручного вызова через палитру
+    let disposable = vscode.commands.registerCommand('dead-inside.say', function () {
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        vscode.window.showInformationMessage(messages[randomIndex]);
+    });
+    context.subscriptions.push(disposable);
+
+    // Автоматические сообщения при сохранении файла
+    vscode.workspace.onDidSaveTextDocument(() => {
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        vscode.window.showInformationMessage(messages[randomIndex]);
+    });
 }
 
-function deactivate() {}
+function deactivate() {
+    console.log("Dead Inside плагин остановлен.");
+}
 
-module.exports = {
-  activate,
-  deactivate
-};
+module.exports = { activate, deactivate };
