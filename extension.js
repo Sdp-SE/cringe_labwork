@@ -11,9 +11,19 @@ function activate(context) {
         "че ты написал??? ты хоть это читаешь???"
     ];
 
-    const changeListener = vscode.workspace.onDidChangeTextDocument(() => {
-        const randomIndex = Math.floor(Math.random() * messages.length);
-        vscode.window.showInformationMessage(messages[randomIndex]);
+    let charCount = 0;
+
+    const changeListener = vscode.workspace.onDidChangeTextDocument((event) => {
+        for (const change of event.contentChanges) {
+            charCount += change.text.length;
+        }
+
+        const threshold = 5 + Math.floor(Math.random() * 6);
+        if (charCount >= threshold) {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            vscode.window.showInformationMessage(messages[randomIndex]);
+            charCount = 0;
+        }
     });
 
     context.subscriptions.push(changeListener);
