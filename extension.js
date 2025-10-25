@@ -11,18 +11,19 @@ function activate(context) {
         "че ты написал??? ты хоть это читаешь???"
     ];
 
-    // Команда для ручного вызова через палитру
-    let disposable = vscode.commands.registerCommand('dead-inside.say', function () {
+    const changeListener = vscode.workspace.onDidChangeTextDocument(() => {
         const randomIndex = Math.floor(Math.random() * messages.length);
         vscode.window.showInformationMessage(messages[randomIndex]);
     });
-    context.subscriptions.push(disposable);
 
-    // Автоматические сообщения при сохранении файла
-    vscode.workspace.onDidSaveTextDocument(() => {
+    context.subscriptions.push(changeListener);
+
+    const disposable = vscode.commands.registerCommand('dead-inside.say', function () {
         const randomIndex = Math.floor(Math.random() * messages.length);
         vscode.window.showInformationMessage(messages[randomIndex]);
     });
+
+    context.subscriptions.push(disposable);
 }
 
 function deactivate() {

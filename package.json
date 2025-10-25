@@ -2,8 +2,8 @@
   "name": "dead-inside",
   "displayName": "Dead Inside",
   "publisher": "your-name",
-  "description": "Плагин, который выводит саркастические (правдивые) сообщения о твоем коде (и о тебе)",
-  "version": "0.0.1",
+  "description": "Плагин, который саркастически комментирует твой код прямо во время набора текста",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.90.0"
   },
